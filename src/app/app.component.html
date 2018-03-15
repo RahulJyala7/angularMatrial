@@ -1,0 +1,89 @@
+<div>
+  <mat-toolbar color="primary">
+    <span><mat-icon>mood</mat-icon></span>
+
+    <span> Angular 2 Forms </span>
+
+    <button mat-icon-button [mat-menu-trigger-for]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-toolbar>
+  <mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item>Option 1</button>
+    <button mat-menu-item>Option 2</button>
+  </mat-menu>
+
+  <mat-card>
+    <button mat-button>All</button>
+    <button mat-raised-button>Of</button>
+    <button mat-raised-button color="primary">The</button>
+    <button mat-raised-button color="accent">Buttons</button>
+  </mat-card>
+
+ 
+</div>
+
+<form #formvalue="ngForm" class="example-form" style="text-align: center">
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Favorite food" name="food" [(ngModel)]="food" value="Sushi" #title="ngModel" required>
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Leave a comment"  name="comment"  value="comment"  [(ngModel)]="comment" required>
+  </mat-form-field>
+
+  <div style="font: bold ; padding-top: 20px ; padding-bottom: 20px" *ngIf="!title.valid || !title.dirty"> Kindly Fill Values </div> 
+
+  <button mat-raised-button color="accent" [disabled]="!formvalue.valid || !formvalue.dirty"  (click)="Submit(formvalue.value)">Buttons</button>
+
+</form>
+
+
+
+
+
+
+
+
+<div style=" text-align: center ; padding-top: 60px"> Reactive Forms  </div>
+
+<form   [formGroup]="myformvalues" class="example-form" style="text-align: center ; padding-top: 40px">
+
+    <mat-form-field class="example-full-width">
+      <input formControlName="food" matInput placeholder="Favorite food" name="food"   >
+    </mat-form-field>
+  
+     <div class="error" *ngIf="myformvalues.get('food').hasError('required') && myformvalues.get('food').touched">
+        Name is required
+      </div>
+  
+    <mat-form-field class="example-full-width">
+      <input  formControlName="comment"  matInput placeholder="Leave a comment"  name="comment" >
+    </mat-form-field>
+
+    <div class="error" *ngIf="myformvalues.get('comment').hasError('required') && myformvalues.get('comment').touched">
+        Comment is required
+      </div>
+  
+    <span class="done"  >
+        <button mat-fab [disabled]="myformvalues.invalid">
+          <mat-icon  (click)="SubmitReactive(myformvalues.value)">check circle</mat-icon>
+        </button>
+    </span>
+  
+  </form>
+
+
+
+  <!-- A Single Form Control -->
+    <mat-form-field class="example-full-width" style="text-align: center">
+      <input [formControl]="SingleFood"  matInput placeholder="Favorite food" name="food"   >
+    </mat-form-field>
+
+   
+  
+
+
+
